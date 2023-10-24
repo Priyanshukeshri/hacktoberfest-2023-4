@@ -1,0 +1,39 @@
+Given a linked list consisting of L nodes and given a number N. The task is to find the Nth node from the end of the linked list.
+
+class ListNode:
+    def __init__(self, value=0, next=None):
+        self.value = value
+        self.next = next
+
+def findNthFromEnd(head, n):
+    if not head:
+        return None
+
+    # Initialize two pointers, first_ptr and second_ptr.
+    first_ptr = head
+    second_ptr = head
+
+    # Move the first_ptr N nodes ahead.
+    for _ in range(n):
+        if first_ptr is None:
+            return None
+        first_ptr = first_ptr.next
+
+    # Move both pointers until the first_ptr reaches the end.
+    while first_ptr:
+        first_ptr = first_ptr.next
+        second_ptr = second_ptr.next
+
+    return second_ptr.value
+
+# Example usage:
+# Create a linked list: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+n = 2
+result = findNthFromEnd(head, n)
+print(result)  # Output: 4
